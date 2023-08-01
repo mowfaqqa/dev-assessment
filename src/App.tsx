@@ -1,12 +1,12 @@
-import "./App.css";
 import React, { useState } from "react";
 import CKEditorComponent from "./components/Editor";
+import "./App.css";
 
 const App = () => {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("<p>Hello from CKEditor!</p>");
+  const [content, setContent] = useState("");
 
-  const handleTitleChange = (event : any) => {
+  const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
   };
 
@@ -15,20 +15,33 @@ const App = () => {
   };
 
   const handleSubmit = () => {
-    // Here, you can submit the title and content to your backend or take any other actions.
+    //
     console.log("Title:", title);
     console.log("Content:", content);
   };
 
   return (
-    <div className="App">
-      <h2>Add Post Title</h2>
-      <input type="text" value={title} onChange={handleTitleChange} />
+    <div className="App max-w-4xl mx-auto mt-6">
+      <h2 className="text-2xl font-bold my-2">
+        {title === "" ? "Add Post Title" : title}
+      </h2>
+      <input
+        type="text"
+        className="w-full px-3 border border-gray-300 py-1 rounded-md"
+        value={title}
+        onChange={handleTitleChange}
+        placeholder="enter title here"
+      />
 
-      <h2>Add Post Content</h2>
       <CKEditorComponent initialValue={content} onChange={handleEditorChange} />
-
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="flex justify-end">
+        <button
+          className=" mt-2 px-4 py-2 text-white text-sm bg-[#0A7227] rounded-md"
+          onClick={handleSubmit}
+        >
+          Post
+        </button>
+      </div>
     </div>
   );
 };
